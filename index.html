@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CV - Nguyễn Văn A">
+  <title>CV - Nguyễn Văn A</title>
+  <style>
+    :root {
+      --color-primary: #2563eb;
+      --color-primary-dark: #1d4ed8;
+      --color-text: #1f2937;
+      --color-text-light: #6b7280;
+      --color-bg: #f9fafb;
+      --color-white: #ffffff;
+      --color-border: #e5e7eb;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+      --radius: 8px;
+      --transition: 0.2s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .cv-container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--color-white);
+      box-shadow: var(--shadow-lg);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .cv-header {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+      color: var(--color-white);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cv-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: float 20s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.3);
+      background: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--color-primary);
+      flex-shrink: 0;
+      box-shadow: var(--shadow-md);
+    }
+
+    .header-text {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .name {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 400;
+      opacity: 0.9;
+      margin-bottom: 16px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 14px;
+      opacity: 0.95;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .contact-item svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    /* Main content */
+    .cv-main {
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .cv-main {
+        grid-template-columns: 1fr;
+        padding: 24px;
+      }
+      .cv-header {
+        padding: 30px 24px;
+      }
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .contact-info {
+        justify-content: center;
+      }
+      .name { font-size: 28px; }
+    }
+
+    /* Sidebar */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .section {
+      background: var(--color-white);
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--color-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Skills */
+    .skill-category {
+      margin-bottom: 20px;
+    }
+
+    .skill-category:last-child {
+      margin-bottom: 0;
+    }
+
+    .skill-category-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 10px;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .skill-tag {
+      background: var(--color-bg);
+      color: var(--color-text);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid var(--color-border);
+      transition: var(--transition);
+    }
+
+    .skill-tag:hover {
+      background: var(--color-primary);
+      color: var(--color-white);
+      border-color: var(--color-primary);
+    }
+
+    /* Languages */
+    .language-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .language-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .language-name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .language-level {
+      display: flex;
+      gap: 3px;
+    }
+
+    .level-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border);
+      transition: var(--transition);
+    }
+
+    .level-dot.filled {
+      background: var(--color-primary);
+    }
+
+    /* Interests */
+    .interests-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .interest-tag {
+      background: var(--color-bg);
+      color: var(--color-text-light);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      border: 1px solid var(--color-border);
+    }
+
+    /* Main content area */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .main-section {
+      animation: fadeIn 0.5s ease backwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .main-section:nth-child(1) { animation-delay: 0.1s; }
+    .main-section:nth-child(2) { animation-delay: 0.2s; }
+    .main-section:nth-child(3) { animation-delay: 0.3s; }
+    .main-section:nth-child(4) { animation-delay: 0.4s; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .section-header svg {
+      width: 20px;
+      height: 20px;
+      color: var(--color-primary);
+    }
+
+    .section-header h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* Summary */
+    .summary-text {
+      font-size: 15px;
+      color: var(--color-text-light);
+      line-height: 1.8;
+    }
+
+    /* Experience / Education / Projects */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 28px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 4px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      border: 3px solid var(--color-white);
+      box-shadow: 0 0 0 2px var(--color-primary);
+      z-index: 1;
+    }
+
+    .timeline-date {
+      font-size: 13px;
+      color: var(--color-text-light);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .timeline-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 2px;
+    }
+
+    .timeline-company {
+      font-size: 14px;
+      color: var(--color-primary);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .timeline-description {
+      font-size: 14px;
+      color: var(--color-text-light);
+      line-height: 1.7;
+    }
+
+    .timeline-description ul {
+      margin-top: 8px;
+      padding-left: 20px;
+    }
+
+    .timeline-description li {
+      margin-bottom: 4px;
+    }
+
+    /* Certificates */
+    .certificates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+    }
+
+    .certificate-card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 16px;
+      transition: var(--transition);
+    }
+
+    .certificate-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .cert-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: 4px;
+    }
+
+    .cert-issuer {
+      font-size: 13px;
+      color: var(--color-text-light);
+      margin-bottom: 4px;
+    }
+
+    .cert-date {
+      font-size: 12px;
+      color: var(--color-text-light);
+    }
+
+    /* Print styles */
+    @media print {
+      body { background: white; }
+      .cv-container { box-shadow: none; max-width: none; }
+      .cv-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .cv-main { display: block; }
+      .sidebar { display: none; }
+      .main-section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cv-container">
+    <!-- Header -->
+    <header class="cv-header">
+      <div class="header-content">
+        <div class="avatar">NVA</div>
+        <div class="header-text">
+          <h1 class="name">Nguyễn Văn A</h1>
+          <p class="title">Senior Fullstack Developer</p>
+          <div class="contact-info">
+            <div class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <span>Hà Nội, Việt Nam</span>
+            </div>
+            <div class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <span>090 123 4567</span>
+            </div>
+            <div class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+              <span>nguyenvana@email.com</span>
+            </div>
+            <div class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              <span>github.com/nguyenvana</span>
+            </div>
+            <div class="contact-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+              <span>linkedin.com/in/nguyenvana</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="cv-main">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <!-- Skills -->
+        <section class="section">
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"/>
+              <polyline points="8 6 2 12 8 18"/>
+            </svg>
+            Kỹ năng
+          </h3>
+
+          <div class="skill-category">
+            <div class="skill-category-name">Frontend</div>
+            <div class="skills-list">
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">Next.js</span>
+              <span class="skill-tag">Vue.js</span>
+              <span class="skill-tag">Tailwind CSS</span>
+              <span class="skill-tag">HTML/CSS</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">Backend</div>
+            <div class="skills-list">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Express</span>
+              <span class="skill-tag">NestJS</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">Redis</span>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <div class="skill-category-name">DevOps & Tools</div>
+            <div class="skills-list">
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">Kubernetes</span>
+              <span class="skill-tag">AWS</span>
+              <span class="skill-tag">Git/GitHub</span>
+              <span class="skill-tag">CI/CD</span>
+              <span class="skill-tag">Linux</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Languages -->
+        <section class="section">
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            Ngoại ngữ
+          </h3>
+
+          <div class="language-item">
+            <span class="language-name">Tiếng Việt</span>
+            <div class="language-level">
+              <span class="level-dot filled"></span>
+              <span class="level-dot filled"></span>
+              <span class="level-dot filled"></span>
+              <span class="level-dot filled"></span>
+              <span class="level-dot filled"></span>
+            </div>
+          </div>
+          <div class="language-item">
+            <span class="language-name">Tiếng Anh</span>
+            <div class="language-level">
+              <span class="level-dot filled"></span>
+              <span class="level-dot filled"></span>
+              <span class="level-dot filled"></span>
+              <span class="level-dot filled"></span>
+              <span class="level-dot"></span>
+            </div>
+          </div>
+          <div class="language-item">
+            <span class="language-name">Tiếng Nhật</span>
+            <div class="language-level">
+              <span class="level-dot filled"></span>
+              <span class="level-dot filled"></span>
+              <span class="level-dot"></span>
+              <span class="level-dot"></span>
+              <span class="level-dot"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Interests -->
+        <section class="section">
+          <h3 class="section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            Sở thích
+          </h3>
+
+          <div class="interests-list">
+            <span class="interest-tag">Open Source</span>
+            <span class="interest-tag">Tech Blogging</span>
+            <span class="interest-tag">Hiking</span>
+            <span class="interest-tag">Photography</span>
+            <span class="interest-tag">Reading</span>
+            <span class="interest-tag">Gaming</span>
+          </div>
+        </section>
+      </aside>
+
+      <!-- Main Content Area -->
+      <div class="main-content">
+        <!-- Summary -->
+        <section class="main-section">
+          <div class="section-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+            <h2>Mục tiêu nghề nghiệp</h2>
+          </div>
+          <p class="summary-text">
+            Senior Fullstack Developer có 6+ năm kinh nghiệm xây dựng và mở rộng các ứng dụng web hiệu năng cao.
+            Chuyên môn sâu về React, Node.js, và kiến trúc hệ thống phân tán. Đam mê clean code, best practices,
+            và mentoring junior developers. Tìm kiếm cơ hội đóng góp vào đội ngũ kỹ thuật mạnh để giải quyết
+            các bài toán phức tạp và tạo ra sản phẩm có tác động thực tế.
+          </p>
+        </section>
+
+        <!-- Experience -->
+        <section class="main-section">
+          <div class="section-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8"/>
+              <path d="M12 17v4"/>
+            </svg>
+            <h2>Kinh nghiệm làm việc</h2>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-date">03/2022 – Hiện tại</div>
+              <h3 class="timeline-title">Senior Fullstack Developer</h3>
+              <p class="timeline-company">Công ty TNHH TechCorp Việt Nam</p>
+              <div class="timeline-description">
+                <ul>
+                  <li>Dẫn dắt team 5 developers xây dựng platform e-commerce xử lý 100k+ orders/ngày</li>
+                  <li>Thiết kế kiến trúc microservices với Node.js, PostgreSQL, Redis, message queue (RabbitMQ)</li>
+                  <li>Tối ưu hiệu năng API: giảm latency từ 800ms xuống 120ms, tăng throughput 5x</li>
+                  <li>Triển khai CI/CD pipeline với GitHub Actions, Docker, Kubernetes trên AWS EKS</li>
+                  <li>Mentoring 3 junior developers, code review, thiết lập coding standards</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-date">06/2019 – 02/2022</div>
+              <h3 class="timeline-title">Fullstack Developer</h3>
+              <p class="timeline-company">Startup FinTech - FinFlow</p>
+              <div class="timeline-description">
+                <ul>
+                  <li>Xây dựng hệ thống thanh toán real-time từ zero đến production</li>
+                  <li>Phát triển frontend với React, Redux, TypeScript; backend với Node.js, Express</li>
+                  <li>Tích hợp payment gateways: VNPAY, MoMo, Stripe, xử lý 50k+ transactions/tháng</li>
+                  <li>Thiết kế database schema, tối ưu query, giảm 60% chi phí cloud</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-date">07/2017 – 05/2019</div>
+              <h3 class="timeline-title">Junior Frontend Developer</h3>
+              <p class="timeline-company">Digital Agency - CreativeWeb</p>
+              <div class="timeline-description">
+                <ul>
+                  <li>Phát triển 20+ dự án website cho khách hàng enterprise (banks, retail, education)</li>
+                  <li>Chuyển đổi design (Figma/Sketch) thành responsive HTML/CSS/JS pixel-perfect</li>
+                  <li>Học và áp dụng React, Vue.js vào các dự án thực tế</li>
+                  <li>Hợp tác chặt chẽ với designers và backend developers</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Education -->
+        <section class="main-section">
+          <div class="section-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+            <h2>Giáo dục</h2>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-date">2013 – 2017</div>
+              <h3 class="timeline-title">Kỹ sư Khoa học Máy tính</h3>
+              <p class="timeline-company">Đại học Bách Khoa Hà Nội (HUST)</p>
+              <div class="timeline-description">
+                Chuyên ngành: Công nghệ Phần mềm | GPA: 3.6/4.0
+                <ul>
+                  <li>Đạt giải Nhất Cuộc thi Lập trình Sinh viên Toàn quốc 2016</li>
+                  <li>Trưởng nhóm dự án tốt nghiệp: "Hệ thống quản lý học tập thích ứng bằng AI"</li>
+                  <li>Tham gia CLB Lập trình, tổ chức hackathon hàng năm</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Projects -->
+        <section class="main-section">
+          <div class="section-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+            <h2>Dự án tiêu biểu</h2>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-date">2023 – Hiện tại</div>
+              <h3 class="timeline-title">EcoTrack - Ứng dụng theo dõi dấu chân carbon</h3>
+              <p class="timeline-company">Side Project | React Native, Node.js, AWS</p>
+              <div class="timeline-description">
+                Ứng dụng mobile giúp người dùng theo dõi và giảm lượng phát thải CO2 cá nhân.
+                10k+ downloads, đánh giá 4.8/5 trên App Store. Open source trên GitHub (2.5k stars).
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-date">2021 – 2022</div>
+              <h3 class="timeline-title">DevFlow - Developer productivity dashboard</h3>
+              <p class="timeline-company">Open Source | Next.js, TypeScript, Prisma</p>
+              <div class="timeline-description">
+                Dashboard thống nhất metrics từ GitHub, Jira, CI/CD để team lead theo dõi hiệu suất.
+                Được featured trên Dev.to, 500+ developers sử dụng hàng tuần.
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- Certificates -->
+        <section class="main-section">
+          <div class="section-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            <h2>Chứng chỉ</h2>
+          </div>
+
+          <div class="certificates-grid">
+            <article class="certificate-card">
+              <div class="cert-name">AWS Certified Solutions Architect – Associate</div>
+              <div class="cert-issuer">Amazon Web Services</div>
+              <div class="cert-date">2023 (Đã gia hạn)</div>
+            </article>
+            <article class="certificate-card">
+              <div class="cert-name">Certified Kubernetes Administrator (CKA)</div>
+              <div class="cert-issuer">Cloud Native Computing Foundation</div>
+              <div class="cert-date">2022</div>
+            </article>
+            <article class="certificate-card">
+              <div class="cert-name">Professional Scrum Master I (PSM I)</div>
+              <div class="cert-issuer">Scrum.org</div>
+              <div class="cert-date">2021</div>
+            </article>
+            <article class="certificate-card">
+              <div class="cert-name">Oracle Certified Professional, Java SE 11</div>
+              <div class="cert-issuer">Oracle</div>
+              <div class="cert-date">2020</div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
